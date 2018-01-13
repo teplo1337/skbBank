@@ -1,6 +1,6 @@
 # skbBank
 # Angular Routing: http://skb.kekcheburek.ru/
-# Node Server: http://skb.kekchenurek.ru/api/
+# Node Server: http://skb.kekcheburek.ru/api
 
 
 tasks-page   => /task-manager/src/app/main-page <br>
