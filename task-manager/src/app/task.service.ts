@@ -4,24 +4,24 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class TaskService {
 
-  getTask() {
-    return this.http.get('/task');
+  getTask(task) {
+    return this.http.get('/api' + task);
   }
 
   getAllTasks() {
-    return this.http.get('/task');
+    return this.http.get('/api');
   }
 
-  newTask(data) {
-    return this.http.post('/task', data);
+  newTask(taskData) {
+    return this.http.post('/api', taskData);
   }
 
-  modifyTask(data) {
-    return this.http.put('/task', data);
+  modifyTask(taskData) {
+    return this.http.put('/api', taskData);
   }
 
   deleteTask(task) {
-    return this.http.delete('/task/' + task);
+    return this.http.delete('/api/' + task);
   }
 
 

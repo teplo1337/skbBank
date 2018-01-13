@@ -20,20 +20,16 @@ let date = {
 let router = (app, db) => {
     
     const collection = db.collection('tasks');
-
-    /* static server */
-
-    app.use(express.static('./task-manager'));
  
     /* rest api */
 
-    app.get('/task', parseJson, (req, res) => {        
+    app.get('/', parseJson, (req, res) => {        
         collection.find().toArray(function(err, result) {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });
 
-    app.post('/task', parseJson, (req, res) => {
+    app.post('/', parseJson, (req, res) => {
         const taskData = {
             "title": req.body.title,
             "description": req.body.description,
@@ -45,7 +41,7 @@ let router = (app, db) => {
         });
     });
 
-    app.put('/task', parseJson, (req, res) => {
+    app.put('/', parseJson, (req, res) => {
         collection.findOneAndUpdate(
             { "title": req.body.oldTitle },
             { $set:
@@ -61,13 +57,13 @@ let router = (app, db) => {
           });
     });
     
-    app.delete('/task/:id', (req, res) => {
+    app.delete('/:id', (req, res) => {
         collection.remove({'title': req.params.id}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });
 
-    app.get('/task/:id', (req, res) => {
+    app.get('/:id', (req, res) => {
         collection.findOne({'title': req.params.id}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });

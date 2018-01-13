@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TaskService } from './task.service';
@@ -10,7 +11,9 @@ import { TaskPageComponent } from './task-page/task-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'task', component: TaskPageComponent }
+  { path: 'task/:id', component: TaskPageComponent }
+ 
+  
 ];
 
 @NgModule({
@@ -21,7 +24,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [TaskService],
   bootstrap: [AppComponent]

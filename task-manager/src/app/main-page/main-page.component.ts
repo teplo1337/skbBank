@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-main-page',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-
-  constructor() { }
+  tasks;
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.taskService.getAllTasks().subscribe(
+      (result) => {
+        this.tasks = result;
+        console.log(this.tasks)
+      },
+      (error) => {
+        this.tasks = error.response;
+      }
+    );
   }
-
 }
