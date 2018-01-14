@@ -42,4 +42,5 @@ input {
 }
 .buffer {
     width: 112px;
+    cursor: default;
 }
