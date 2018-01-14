@@ -1,5 +1,5 @@
 # skbBank
-# Angular Routing: http://skb.kekcheburek.ru/ && http://skb.kekcheburek.ru/task/:id
+# Angular Routing: http://skb.kekcheburek.ru/ && /task/:id
 # Node Server: http://skb.kekcheburek.ru/api
 
 
