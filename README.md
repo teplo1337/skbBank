@@ -3,13 +3,11 @@
 # Node Server: http://skb.kekcheburek.ru/api
 
 
-tasks-page   => /task-manager/src/app/main-page <br>
-task-page    => /task-manager/src/app/task-page <br>
+tasks-page.component   => /task-manager/src/app/main-page <br>
+task-page.component    => /task-manager/src/app/task-page <br>
 service      => /task-manager/src/app/task.service <br>
 node-server  => server.js <br>
 mongodb      => 'mongodb:/login:password@ds046377.mlab.com:46377/task-manager';
-
-task
 
 ```
 Тестовое задание:
