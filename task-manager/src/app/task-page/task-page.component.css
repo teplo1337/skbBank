@@ -40,6 +40,6 @@ input {
     width: 40px;
     height: 20px;
 }
-.back-buffer {
+.buffer {
     width: 112px;
 }
