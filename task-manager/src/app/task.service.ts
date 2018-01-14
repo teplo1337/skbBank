@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export class TaskService {
 
   getTask(task) {
-    return this.http.get('/api' + task);
+    return this.http.get('/api/' + task);
   }
 
   getAllTasks() {

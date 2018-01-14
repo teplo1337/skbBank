@@ -1,14 +1,22 @@
 <div class="container">  
-  <div (click)="newTask=!newTask" class="header">&#43;</div>
+  <div (click)="createNewTask()" class="header">&#43;</div>
 
   <div class="content" *ngFor="let task of tasks">
-
-    <div class="title" (click)="selectTask(task)">{{task.title}}</div>
-    <app-task-page *ngIf="task === selectedTask" [title]="task.title"></app-task-page>
+    <div (click)="selectTask(task)" [class.title-red]="checkTermRed(task)" [class.title-warning]="checkTermWarning(task)" class="title">
+      <label class="task-position">Pos: {{task.position}}</label>
+      <label>{{task.title}}</label>
+      <label>{{task.term.replace("T", " ")}}</label>
+    </div>
+    <app-task-page 
+      (modify)="modifyTask($event)"
+      (delete)="deleteTask($event)"
+      *ngIf="task === selectedTask" 
+      [id]="task._id">
+    </app-task-page>
 
   </div>
 
-  <div (click)="newTask=!newTask" class="header">&#43;</div>
-  <app-task-page *ngIf="newTask"></app-task-page>
+  <div (click)="createNewTask()" class="header">&#43;</div>
+  <app-task-page (create)="createTask($event)" *ngIf="newTask"></app-task-page>
   
 </div>

@@ -1,6 +1,7 @@
 const express         = require('express'),
       app             = express(),
-      mongoClient     = require('mongodb').MongoClient,
+      mongodb         = require('mongodb'),
+      mongoClient     = mongodb.MongoClient,
       bodyParser      = require('body-parser'),
       parseJson       = bodyParser.json(),
       dbUri           = 'mongodb://root:1@ds046377.mlab.com:46377/task-manager';
@@ -57,14 +58,14 @@ let router = (app, db) => {
           });
     });
     
-    app.delete('/:id', (req, res) => {
-        collection.remove({'title': req.params.id}, (err, result) => {
+    app.delete('//:id', (req, res) => {
+        collection.remove({_id: new mongodb.ObjectID(req.params.id)}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });
 
-    app.get('/:id', (req, res) => {
-        collection.findOne({'title': req.params.id}, (err, result) => {
+    app.get('//:id', (req, res) => {
+        collection.findOne({_id: new mongodb.ObjectID(req.params.id)}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });

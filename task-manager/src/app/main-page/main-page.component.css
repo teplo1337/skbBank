@@ -1,18 +1,42 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    color: #824141;
 }
 .header {
-    border: 1px solid rgb(74, 86, 255);
+    border: 1px solid rgb(128, 136, 255);
     text-align: center;
-    font-size: 4rem;
+    font-size: 2rem;
     color: white;
-    background-color: rgb(144, 144, 255);
+    background-color: rgb(122, 120, 248);
 }
 .title {
     border: 1px solid rgb(211, 213, 231);
     text-align: center;
-    font-size: 4rem;
-    background-color: rgb(221, 221, 255);
+    font-size: 2rem;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.title-warning {
+    border: 1px solid rgb(255, 207, 207);
+    font-size: 2rem;
+    background-color: rgb(255, 218, 218);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.title-red {
+    border: 1px solid rgb(255, 207, 207);
+    text-align: center;
+    font-size: 2rem;
+    background-color: rgb(255, 134, 134);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.task-position {
+    width: 281px;
+    text-align: left;
 }

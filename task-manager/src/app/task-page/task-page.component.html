@@ -1,18 +1,22 @@
 <div class="task-container" *ngIf="task">
-  <div class="task-block">
-    <div><button *ngIf="!title" [routerLink]="['']">Back</button></div>
-    <input type="text" name="title" value="{{task.title}}" disabled>
-    <div>
-      <div>&#9998;</div>
-      <div>&#10006;</div>
-    </div> 
-  </div>
-  <div class="task-content">
-    <textarea rows="10" cols="45" name="text">{{task.description}}</textarea>
+  <form #taskForm="ngForm" >
     <div class="task-block">
-      <button>Save</button>
-      <div>Term date: <input id="date" type="datetime-local" value="{{task.term}}" disabled></div>
-      <div>Pos:<input id="position" type="number" value="{{task.position}}" [class.edit]="task === selectedTask" disabled></div>      
+      <div class="back-buffer"><button *ngIf="!id && !newTask" [routerLink]="['']">Back</button></div>
+      <input #input type="text" name="title" ngModel="{{task.title}}" required disabled>
+      <div>
+        <div *ngIf="!newTask" [routerLink]="['/task', task._id]">link</div>
+        <div *ngIf="!newTask" (click)="editTask(taskForm)">&#9998;</div>
+        <div *ngIf="!newTask" (click)="deleteTask(taskForm)">&#10006;</div>
+      </div> 
     </div>
-  </div>
+    <div class="task-content">
+      <textarea #textarea rows="10" cols="45" placeholder="Write description" name="description" disabled>{{task.description}}</textarea>
+      <div class="task-block">
+        <button *ngIf="!newTask" type="submit" (click)="modifyTask(taskForm)">Save</button>
+        <button *ngIf="newTask" type="submit" (click)="createTask(taskForm)">Create</button>
+        <div>Term date: <input #input id="date" name="date" type="datetime-local" ngModel ="{{task.term}}" ngModel  required disabled></div>
+        <div>Pos:<input #input id="position" name="pos" type="number" ngModel="{{task.position}}" required disabled></div>      
+      </div>
+    </div>
+  </form>
 </div>

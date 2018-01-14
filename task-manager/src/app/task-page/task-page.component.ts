@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, ViewChildren, ViewChild } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
@@ -10,10 +10,17 @@ import { Task } from '../task';
 })
 export class TaskPageComponent implements OnInit {
 
-  @Input('title') title: string;
+  @ViewChildren('input') inputs;
+  @ViewChild('textarea') text;
+  @Input('id') id: string;
+
+  @Output() create = new EventEmitter<Task>();
+  @Output() modify = new EventEmitter<Task>();
+  @Output() delete = new EventEmitter<Task>();
   task: Task;
   selectedTask: boolean;
   newTask: boolean;
+
 
   constructor(private taskService: TaskService, private activateRoute: ActivatedRoute) {
 
@@ -22,23 +29,65 @@ export class TaskPageComponent implements OnInit {
   ngOnInit() {
     if (this.activateRoute.snapshot.params['id']) {
       this.getTask(this.activateRoute.snapshot.params['id']);
-    } else if (this.title) {
-      this.getTask(this.title);
+
+    } else if (this.id) {
+      this.getTask(this.id);
+
     } else {
-      this.task = new Task;
       this.newTask = true;
+
+      this.task = new Task;
+      this.task.title = 'new title';
+      this.task.position = 0;
+
+      setTimeout(() => {
+        this.editTask();
+      }, 0);
     }
   }
 
-  getTask (taskTitle) {
-    this.taskService.getTask(taskTitle).subscribe(
+  /* controls */
+
+  getTask (taskId) {
+    this.taskService.getTask(taskId).subscribe(
       (result: Task) => {
         this.task = result as Task;
-        console.log(this.task);
       },
       (error) => {
         this.task = error.response;
       }
     );
+  }
+
+  editTask () {
+    this.inputs.toArray().forEach((input) => {
+      input.nativeElement.disabled = false;
+    });
+    this.text.nativeElement.disabled = false;
+  }
+
+  /* requests */
+
+  deleteTask(taskForm) {
+    this.delete.emit(this.task);
+  }
+
+  modifyTask(taskForm) {
+    this.task.description = this.text.nativeElement.value;
+    this.task.oldTitle = this.task.title;
+    this.task.title = taskForm.value.title;
+    this.task.position = taskForm.value.pos;
+    this.task.term = taskForm.value.date;
+
+    this.modify.emit(this.task);
+  }
+
+  createTask(taskForm) {
+    this.task.description = this.text.nativeElement.value;
+    this.task.title = taskForm.value.title;
+    this.task.position = taskForm.value.pos;
+    this.task.term = taskForm.value.date;
+
+    this.create.emit(this.task);
   }
 }

@@ -7,6 +7,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
+
 })
 export class MainPageComponent implements OnInit {
   tasks: Task [];
@@ -15,9 +16,17 @@ export class MainPageComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.getTasks();
+  }
+
+  getTasks() {
+    this.selectedTask = undefined;
+    this.newTask = false;
     this.taskService.getAllTasks().subscribe(
       (result: Task []) => {
-        this.tasks = result;
+        this.tasks = result.sort((a, b) => {
+          return a.position - b.position;
+        });
       },
       (error) => {
         this.tasks = error.response;
@@ -26,13 +35,68 @@ export class MainPageComponent implements OnInit {
   }
 
   selectTask (task: Task) {
+    this.newTask = undefined;
     if (task === this.selectedTask) {
       this.selectedTask = undefined;
     } else {
       this.selectedTask = task;
     }
   }
+  createNewTask() {
+    this.selectedTask = undefined;
+    this.newTask = !this.newTask;
+  }
 
-  initializeNewTask () {
+  checkTermWarning(task: Task) {
+    const now: Date = new Date();
+    const taskTime: Date = new Date(task.term);
+    const a: number = now.getTime();
+    const b: number = taskTime.getTime();
+
+    return (b - a <= 259200000) ? true : false;
+  }
+
+  checkTermRed(task: Task) {
+    const now: Date = new Date();
+    const taskTime: Date = new Date(task.term);
+    const a: number = now.getTime();
+    const b: number = taskTime.getTime();
+
+    return (b - a < 0) ? true : false;
+  }
+
+/* requests */
+
+  deleteTask(task: Task) {
+    this.taskService.deleteTask(task._id).subscribe(
+      (res) => {
+        this.getTasks();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  modifyTask(task: Task) {
+    this.taskService.modifyTask(task).subscribe(
+      (res) => {
+        this.getTasks();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  createTask(task: Task) {
+    this.taskService.newTask(task).subscribe(
+      (res) => {
+        this.getTasks();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

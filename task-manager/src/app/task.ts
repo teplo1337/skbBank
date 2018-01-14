@@ -4,4 +4,5 @@ export class Task {
     description: string;
     term: Date;
     position: number;
+    _id: string;
 }
