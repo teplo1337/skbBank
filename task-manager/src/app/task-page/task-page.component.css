@@ -1,0 +1,39 @@
+.task-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(242, 242, 255);
+}
+.task-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.task-block div {
+    display: inline-block;
+    margin-right: 10px;
+}
+.task-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+button {
+    background-color: rgb(144, 144, 255);
+    border: 1px solid rgb(201, 205, 255);
+    color: white;
+}
+input:disabled {
+    border: none;
+    display: inline;
+    font-family: inherit;
+    font-size: inherit;
+    padding: none;
+    background-color: rgb(242, 242, 255);
+}
+input {
+    text-align: center;
+}
+#position {
+    width: 40px;
+    height: 20px;
+}

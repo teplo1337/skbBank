@@ -1,3 +1,18 @@
-<p *ngIf="task">
-   {{task.title}}
-</p>
+<div class="task-container" *ngIf="task">
+  <div class="task-block">
+    <div><button *ngIf="!title" [routerLink]="['']">Back</button></div>
+    <input type="text" name="title" value="{{task.title}}" disabled>
+    <div>
+      <div>&#9998;</div>
+      <div>&#10006;</div>
+    </div> 
+  </div>
+  <div class="task-content">
+    <textarea rows="10" cols="45" name="text">{{task.description}}</textarea>
+    <div class="task-block">
+      <button>Save</button>
+      <div>Term date: <input id="date" type="datetime-local" value="{{task.term}}" disabled></div>
+      <div>Pos:<input id="position" type="number" value="{{task.position}}" [class.edit]="task === selectedTask" disabled></div>      
+    </div>
+  </div>
+</div>

@@ -1,3 +1,14 @@
-<p *ngFor="let task of tasks" >
-  <a href="/task/{{task.title}}">{{task.title}}</a>  
-</p>
+<div class="container">  
+  <div (click)="newTask=!newTask" class="header">&#43;</div>
+
+  <div class="content" *ngFor="let task of tasks">
+
+    <div class="title" (click)="selectTask(task)">{{task.title}}</div>
+    <app-task-page *ngIf="task === selectedTask" [title]="task.title"></app-task-page>
+
+  </div>
+
+  <div (click)="newTask=!newTask" class="header">&#43;</div>
+  <app-task-page *ngIf="newTask"></app-task-page>
+  
+</div>

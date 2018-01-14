@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.header {
+    border: 1px solid rgb(74, 86, 255);
+    text-align: center;
+    font-size: 4rem;
+    color: white;
+    background-color: rgb(144, 144, 255);
+}
+.title {
+    border: 1px solid rgb(211, 213, 231);
+    text-align: center;
+    font-size: 4rem;
+    background-color: rgb(221, 221, 255);
+}
