@@ -1,6 +1,5 @@
 <div class="container">  
   <div (click)="createNewTask()" class="header">&#43;</div>
-
   <div class="content" *ngFor="let task of tasks">
     <div (click)="selectTask(task)" [class.title-red]="checkTermRed(task)" [class.title-warning]="checkTermWarning(task)" class="title">
       <label class="task-position">Pos: {{task.position}}</label>
