@@ -2,6 +2,7 @@ import { Component, Input, EventEmitter, Output, OnInit, ViewChildren, ViewChild
 import { ActivatedRoute} from '@angular/router';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-page',
@@ -22,7 +23,7 @@ export class TaskPageComponent implements OnInit {
   newTask: boolean;
   isLink: boolean;
 
-  constructor(private taskService: TaskService, private activateRoute: ActivatedRoute) {
+  constructor(private router: Router, private taskService: TaskService, private activateRoute: ActivatedRoute) {
 
   }
 
@@ -62,7 +63,7 @@ export class TaskPageComponent implements OnInit {
     } else {
       this.taskService.deleteTask(this.task._id).subscribe(
         (res) => {
-          console.log(res);
+          this.router.navigate(['']);
         },
         (err) => {
           console.log(err);
@@ -85,7 +86,7 @@ export class TaskPageComponent implements OnInit {
     } else {
       this.taskService.modifyTask(this.task).subscribe(
         (res) => {
-
+          this.router.navigate(['']);
         },
         (err) => {
           console.log(err);
