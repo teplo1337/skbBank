@@ -1,12 +1,12 @@
 <div class="task-container" *ngIf="task">
   <form #taskForm="ngForm" novalidate>
     <div class="task-block">
-      <div class="buffer"><button *ngIf="!id && !newTask" [routerLink]="['']">Back</button></div>
+      <div class="buffer"><button *ngIf="!newTask" [routerLink]="['']">Back</button></div>
       <input #input type="text" name="title" [ngModel]="task.title" required disabled>
       <div  class="buffer">
         <div *ngIf="!newTask" [routerLink]="['/task', task._id]">link</div>
         <div *ngIf="!newTask" (click)="editTask(taskForm)">&#9998;</div>
-        <div *ngIf="!newTask" (click)="deleteTask(taskForm)">&#10006;</div>
+        <div *ngIf="!newTask" (click)="deleteTask()">&#10006;</div>
       </div> 
     </div>
     <div class="task-content">

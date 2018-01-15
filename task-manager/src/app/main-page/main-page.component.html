@@ -10,12 +10,9 @@
       (modify)="modifyTask($event)"
       (delete)="deleteTask($event)"
       *ngIf="task === selectedTask" 
-      [id]="task._id">
+      [task]="task">
     </app-task-page>
-
   </div>
-
   <div (click)="createNewTask()" class="header">&#43;</div>
-  <app-task-page (create)="createTask($event)" *ngIf="newTask"></app-task-page>
-  
+  <app-task-page (create)="createTask($event)" *ngIf="newTask"></app-task-page>  
 </div>

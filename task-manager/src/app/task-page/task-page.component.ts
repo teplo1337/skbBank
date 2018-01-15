@@ -12,15 +12,15 @@ export class TaskPageComponent implements OnInit {
 
   @ViewChildren('input') inputs;
   @ViewChild('textarea') text;
-  @Input('id') id: string;
+  @Input('task') task: Task;
 
   @Output() create = new EventEmitter<Task>();
   @Output() modify = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
-  task: Task;
+
   selectedTask: boolean;
   newTask: boolean;
-
+  isLink: boolean;
 
   constructor(private taskService: TaskService, private activateRoute: ActivatedRoute) {
 
@@ -29,13 +29,9 @@ export class TaskPageComponent implements OnInit {
   ngOnInit() {
     if (this.activateRoute.snapshot.params['id']) {
       this.getTask(this.activateRoute.snapshot.params['id']);
-
-    } else if (this.id) {
-      this.getTask(this.id);
-
-    } else {
+      this.isLink = true;
+    } else if (!this.task) {
       this.newTask = true;
-
       this.task = new Task;
       this.task.title = 'new title';
       this.task.position = 0;
@@ -48,17 +44,6 @@ export class TaskPageComponent implements OnInit {
 
   /* controls */
 
-  getTask (taskId) {
-    this.taskService.getTask(taskId).subscribe(
-      (result: Task) => {
-        this.task = result as Task;
-      },
-      (error) => {
-        this.task = error.response;
-      }
-    );
-  }
-
   editTask () {
     this.inputs.toArray().forEach((input) => {
       input.nativeElement.disabled = false;
@@ -68,8 +53,22 @@ export class TaskPageComponent implements OnInit {
 
   /* requests */
 
-  deleteTask(taskForm) {
-    this.delete.emit(this.task);
+  deleteTask() {
+
+    /* if we use link */
+
+    if (!this.isLink) {
+      this.delete.emit(this.task);
+    } else {
+      this.taskService.deleteTask(this.task._id).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   modifyTask(taskForm) {
@@ -81,7 +80,9 @@ export class TaskPageComponent implements OnInit {
 
     /* if we use link */
 
-    if (!this.id) {
+    if (!this.isLink) {
+      this.modify.emit(this.task);
+    } else {
       this.taskService.modifyTask(this.task).subscribe(
         (res) => {
 
@@ -90,9 +91,21 @@ export class TaskPageComponent implements OnInit {
           console.log(err);
         }
       );
-    } else {
-      this.modify.emit(this.task);
     }
+  }
+
+  getTask (taskId: string) {
+
+    /* if we use link */
+
+    this.taskService.getTask(taskId).subscribe(
+      (result: Task) => {
+        this.task = result as Task;
+      },
+      (error) => {
+        this.task = error.response;
+      }
+    );
   }
 
   createTask(taskForm) {
