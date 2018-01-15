@@ -79,7 +79,20 @@ export class TaskPageComponent implements OnInit {
     this.task.position = taskForm.value.pos;
     this.task.term = taskForm.value.date;
 
-    this.modify.emit(this.task);
+    /* if we use link */
+
+    if (!this.id) {
+      this.taskService.modifyTask(this.task).subscribe(
+        (res) => {
+
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.modify.emit(this.task);
+    }
   }
 
   createTask(taskForm) {
