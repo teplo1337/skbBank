@@ -21,8 +21,8 @@
     justify-content: center;
 }
 button {
-    background-color: rgb(144, 144, 255);
-    border: 1px solid rgb(201, 205, 255);
+    background-color: #824141;
+    border: 1px solid #c57272;
     color: white;
 }
 input:disabled {
