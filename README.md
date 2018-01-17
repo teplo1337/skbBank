@@ -5,9 +5,13 @@
 
 tasks-page.component   => /task-manager/src/app/main-page <br>
 task-page.component    => /task-manager/src/app/task-page <br>
+request in task-page for link version <br> <br>
+
 service      => /task-manager/src/app/task.service <br>
 node-server  => server.js <br>
 mongodb      => 'mongodb:/login:password@ds046377.mlab.com:46377/task-manager';
+
+
 
 ```
 Тестовое задание:
