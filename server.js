@@ -24,13 +24,13 @@ let router = (app, db) => {
  
     /* rest api */
 
-    app.get('/', parseJson, (req, res) => {        
+    app.get('/api/', parseJson, (req, res) => {        
         collection.find().toArray(function(err, result) {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });
 
-    app.post('/', parseJson, (req, res) => {
+    app.post('/api/', parseJson, (req, res) => {
         const taskData = {
             "title": req.body.title,
             "description": req.body.description,
@@ -42,7 +42,7 @@ let router = (app, db) => {
         });
     });
 
-    app.put('/', parseJson, (req, res) => {
+    app.put('/api/', parseJson, (req, res) => {
         collection.findOneAndUpdate(
             { "title": req.body.oldTitle },
             { $set:
@@ -58,13 +58,13 @@ let router = (app, db) => {
           });
     });
     
-    app.delete('//:id', (req, res) => {
+    app.delete('/api/:id', (req, res) => {
         collection.remove({_id: new mongodb.ObjectID(req.params.id)}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
     });
 
-    app.get('//:id', (req, res) => {
+    app.get('/api/:id', (req, res) => {
         collection.findOne({_id: new mongodb.ObjectID(req.params.id)}, (err, result) => {
             (err) ? res.status(500).send(err) : res.status(200).send(result);
         });
