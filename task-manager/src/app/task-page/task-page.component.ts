@@ -73,11 +73,12 @@ export class TaskPageComponent implements OnInit {
   }
 
   modifyTask(taskForm) {
-    this.task.description = this.text.nativeElement.value;
     this.task.oldTitle = this.task.title;
-    this.task.title = taskForm.value.title;
-    this.task.position = taskForm.value.pos;
-    this.task.term = taskForm.value.date;
+    this.task.description = this.text.nativeElement.value;
+    this.task.title = (taskForm.value.title) ? taskForm.value.title : 'unnamed';
+    this.task.position = (taskForm.value.pos) ? taskForm.value.pos : 0;
+    this.task.term = (taskForm.value.date) ? taskForm.value.date : new Date().toISOString().split('.')[0].slice(0, -3);
+
 
     /* if we use link */
 
