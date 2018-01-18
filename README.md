@@ -10,8 +10,26 @@ request in task-page for link version <br> <br>
 service      => /task-manager/src/app/task.service <br>
 node-server  => server.js <br>
 mongodb      => 'mongodb:/login:password@ds046377.mlab.com:46377/task-manager';
+ <br>
 
-
+nginx conf:
+```
+    server {
+        listen       80;
+        server_name  skb.kekcheburek.ru;
+        index index.html;
+        root skbBank/task-manager/dist;
+        location / {
+            try_files $uri /$uri /index.html;          
+        }
+        location = /api {
+           proxy_pass http://localhost:8888/api;
+        }
+        location ^~ /api/ {
+           proxy_pass http://localhost:8888/api/;
+        }
+    }
+```
 
 ```
 Тестовое задание:
