@@ -3,6 +3,7 @@
     flex-direction: column;
     color: #824141;
 }
+
 .header { 
     text-align: center;
     font-size: 2rem;
@@ -10,6 +11,7 @@
     background-color: #824141;
     border: 1px solid #c57272;
 }
+
 .title {
     border: 1px solid rgb(211, 213, 231);
     text-align: center;
@@ -19,6 +21,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 .title-warning {
     border: 1px solid rgb(255, 207, 207);
     font-size: 2rem;
@@ -27,6 +30,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 .title-red {
     border: 1px solid rgb(255, 207, 207);
     text-align: center;
@@ -36,6 +40,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 .task-position {
     width: 281px;
     text-align: left;

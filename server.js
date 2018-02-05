@@ -43,8 +43,9 @@ let router = (app, db) => {
     });
 
     app.put('/api/', parseJson, (req, res) => {
+        console.log(req.body)
         collection.findOneAndUpdate(
-            { "title": req.body.oldTitle },
+            {_id: new mongodb.ObjectID(req.body._id)},
             { $set:
               {
                 "title": req.body.title,
@@ -54,6 +55,7 @@ let router = (app, db) => {
               }
             }
           ,(err, result) => {
+              console.log(result);
             (err) ? res.status(500).send(err) : res.status(200).send(result);
           });
     });

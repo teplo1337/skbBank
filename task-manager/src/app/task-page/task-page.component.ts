@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnInit, ViewChildren, ViewChild } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
 import { Router } from '@angular/router';

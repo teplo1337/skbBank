@@ -47,7 +47,7 @@ export class MainPageComponent implements OnInit {
     this.newTask = !this.newTask;
   }
 
-  checkTermWarning(task: Task) {
+  checkTermWarning(task: Task): boolean {
     const now: Date = new Date();
     const taskTime: Date = new Date(task.term);
     const a: number = now.getTime();
@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit {
     return (b - a <= 259200000) ? true : false;
   }
 
-  checkTermRed(task: Task) {
+  checkTermRed(task: Task): boolean {
     const now: Date = new Date();
     const taskTime: Date = new Date(task.term);
     const a: number = now.getTime();

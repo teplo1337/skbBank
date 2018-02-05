@@ -3,28 +3,34 @@
     flex-direction: column;
     background-color: rgb(242, 242, 255);
 }
+
 .task-block {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .task-block div {
     display: inline-block;
     margin-right: 10px;
 }
+
 .task-block div a{
     color: black;
 }
+
 .task-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 button {
     background-color: #824141;
     border: 1px solid #c57272;
     color: white;
 }
+
 input:disabled {
     border: none;
     display: inline;
@@ -33,13 +39,16 @@ input:disabled {
     padding: none;
     background-color: rgb(242, 242, 255);
 }
+
 input {
     text-align: center;
 }
+
 #position {
     width: 40px;
     height: 20px;
 }
+
 .buffer {
     width: 112px;
     cursor: default;
